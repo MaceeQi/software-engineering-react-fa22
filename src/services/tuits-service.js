@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://my-node-express-project-env.eba-hxq4pgvm.us-east-1.elasticbeanstalk.com"
+const BASE_URL = "http://fse-a2-env.eba-6nbikgir.us-east-1.elasticbeanstalk.com"
 const TUITS_API = `${BASE_URL}/api/tuits`;
 const USERS_API = `${BASE_URL}/api/users`;
 
@@ -20,7 +20,7 @@ export const createTuit = (uid, tuit) =>
     .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
-  axios.post(`${TUITS_API}/${tid}`, tuit)
+  axios.put(`${TUITS_API}/${tid}`, tuit)
     .then(response => response.data);
 
 export const deleteTuit = (tid) =>

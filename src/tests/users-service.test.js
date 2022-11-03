@@ -95,7 +95,7 @@ describe('findUserById',  () => {
     expect(newUser.email).toEqual(adam.email);
 
     // retrieve the user from the database by its primary key
-    const existingUser = await findUserById(newUser._id);
+    const existingUser = await findUserById(newUser.id);
 
     // verify retrieved user matches parameter user
     expect(existingUser.username).toEqual(adam.username);
@@ -125,12 +125,12 @@ describe('findAllUsers',  () => {
   );
 
   // clean up after ourselves
-  afterAll(() =>
+  afterAll(async () => {
     // delete the users we inserted
-    usernames.map(username =>
-      deleteUsersByUsername(username)
-    )
-  );
+    for (let username of usernames) {
+      await deleteUsersByUsername(username);
+    }
+  });
 
   test('can retrieve all users from REST API', async () => {
     // retrieve all the users

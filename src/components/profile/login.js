@@ -20,20 +20,25 @@ export const Login = () => {
   const deleteUser = (uid) =>
     service.deleteUser(uid)
       .then(findAllUsers)
+
   const findAllUsers = () =>
     service.findAllUsers()
       .then(users => {
         setExistingUsers(users)
       })
+
   const register = () =>
     service.createUser(newUser)
       .then(findAllUsers);
+
   const login = () =>
     service.findUserByCredentials(loginUser)
       .then((user) => {
         //navigate(`/home/${user._id}`)
       });
+
   useEffect(findAllUsers, []);
+
   return (
     <div>
       <h1>Register</h1>
