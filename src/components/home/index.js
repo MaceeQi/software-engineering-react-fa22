@@ -1,38 +1,51 @@
 import React from "react";
 import Tuits from "../tuits";
-import * as service from "../../services/tuits-service";
+import * as tuitsService from "../../services/tuits-service";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
+import * as service from "../../services/auth-service";
 
 const Home = () => {
   const location = useLocation();
   const {uid} = useParams();
   const [tuits, setTuits] = useState([]);
   const [tuit, setTuit] = useState('');
-  const userId = uid;
+  const [user, setUser] = useState({});
+  let userId = user._id;
 
   const findTuits = () => {
-    if(uid) {
-      return service.findTuitByUser(uid)
+    if(userId !== undefined) {
+      return tuitsService.findTuitByUser(userId)
         .then(tuits => setTuits(tuits))
     } else {
-      return service.findAllTuits()
+      return tuitsService.findAllTuits()
         .then(tuits => setTuits(tuits))
     }
   }
 
-  useEffect(() => {
+  const findUser = async () => {
+    try {
+      const currentUser = await service.profile();
+      setUser(currentUser);
+      userId = currentUser._id;
+    } catch (e) {
+      console.log("No one logged in");
+    }
+  }
+
+  useEffect(async () => {
     let isMounted = true;
-    findTuits()
+    await findUser();
+    findTuits();
     return () => {isMounted = false;}
   }, []);
 
   const createTuit = () =>
-      service.createTuit(userId, {tuit})
+      tuitsService.createTuit(userId, {tuit})
           .then(findTuits)
 
   const deleteTuit = (tid) =>
-      service.deleteTuit(tid)
+      tuitsService.deleteTuit(tid)
           .then(findTuits)
 
   return(
@@ -40,11 +53,11 @@ const Home = () => {
       <div className="border border-bottom-0">
         <h4 className="fw-bold p-2">Home Screen</h4>
         {
-          uid &&
+          userId &&
           <div className="d-flex">
             <div className="p-2">
               <img className="ttr-width-50px rounded-circle"
-                   src="../images/nasa-logo.jpg"/>
+                   src={require(`../../images/${user.username}.jpg`)}/>
             </div>
             <div className="p-2 w-100">
               <textarea

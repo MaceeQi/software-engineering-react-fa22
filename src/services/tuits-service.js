@@ -1,7 +1,11 @@
 import axios from "axios";
-const BASE_URL = "http://fse-a2-env.eba-6nbikgir.us-east-1.elasticbeanstalk.com"
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const TUITS_API = `${BASE_URL}/api/tuits`;
 const USERS_API = `${BASE_URL}/api/users`;
+
+const api = axios.create({
+    withCredentials: true
+});
 
 export const findAllTuits = () =>
   axios.get(TUITS_API)
@@ -12,11 +16,11 @@ export const findTuitById = (tid) =>
     .then(response => response.data);
 
 export const findTuitByUser = (uid) =>
-  axios.get(`${USERS_API}/${uid}/tuits`)
+  api.get(`${USERS_API}/${uid}/tuits`)
     .then(response => response.data);
 
 export const createTuit = (uid, tuit) =>
-  axios.post(`${USERS_API}/${uid}/tuits`, tuit)
+  api.post(`${USERS_API}/${uid}/tuits`, tuit)
     .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
