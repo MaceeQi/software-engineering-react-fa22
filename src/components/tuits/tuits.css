@@ -11,3 +11,12 @@
     content: "";
     padding-top: 56.25%;
 }
+
+.ttr-nudge-up {
+    bottom: 0.5px;
+}
+
+.ttr-nudge-down {
+    left: 2px;
+    top: 3px;
+}
