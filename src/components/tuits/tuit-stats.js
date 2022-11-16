@@ -40,7 +40,7 @@ const TuitStats = ({tuit, likeTuit}) => {
                     }
                     {/* Likes <= 0: render empty heart */}
                     {
-                        tuit.stats.likes <=0 &&
+                        tuit.stats.likes <= 0 &&
                         <i className="bi bi-heart"></i>
                     }
 
