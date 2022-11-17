@@ -36,12 +36,12 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
                     {/* Likes > 0: render solid thumbs up */}
                     {
                         tuit.stats.likes > 0 &&
-                        <i className="bi bi-hand-thumbs-up-fill text-danger"></i>
+                        <i className="bi bi-hand-thumbs-up-fill text-danger" title="solid thumbs up"></i>
                     }
                     {/* Likes <= 0: render empty thumbs up */}
                     {
                         tuit.stats.likes <= 0 &&
-                        <i className="bi bi-hand-thumbs-up"></i>
+                        <i className="bi bi-hand-thumbs-up" title="empty thumbs up"></i>
                     }
 
                     <span className="ms-2">
@@ -57,12 +57,12 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
                     {/* Dislikes > 0: render solid thumbs down */}
                     {
                         tuit.stats.dislikes > 0 &&
-                        <i className="bi bi-hand-thumbs-down-fill text-danger"></i>
+                        <i className="bi bi-hand-thumbs-down-fill text-danger" title="solid thumbs down"></i>
                     }
                     {/* Dislikes <= 0: render empty thumbs down */}
                     {
                         tuit.stats.dislikes <= 0 &&
-                        <i className="bi bi-hand-thumbs-down"></i>
+                        <i className="bi bi-hand-thumbs-down" title="empty thumbs down"></i>
                     }
 
                     <span className="ms-2">
