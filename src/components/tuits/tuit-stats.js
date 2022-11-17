@@ -1,7 +1,6 @@
 import React from "react";
 
-const TuitStats = ({tuit, likeTuit}) => {
-    const userLiked
+const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
 
     return(
         <div className="row mt-2">
@@ -54,7 +53,7 @@ const TuitStats = ({tuit, likeTuit}) => {
             {/* Dislikes */}
             <div className="col">
                 {/* Callback toggle dislike tuit on click and force screen to refresh */}
-                <span>
+                <span onClick={() => dislikeTuit(tuit)}>
                     {/* Dislikes > 0: render solid thumbs down */}
                     {
                         tuit.stats.dislikes > 0 &&
@@ -63,7 +62,7 @@ const TuitStats = ({tuit, likeTuit}) => {
                     {/* Dislikes <= 0: render empty thumbs down */}
                     {
                         tuit.stats.dislikes <= 0 &&
-                        <i className="bi bi-hand-thumbs-up-fill"></i>
+                        <i className="bi bi-hand-thumbs-down"></i>
                     }
 
                     <span className="ms-2">

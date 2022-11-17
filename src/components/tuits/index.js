@@ -11,6 +11,12 @@ const Tuits = ({tuits = [], deleteTuit, refreshTuits}) => {
             .then(refreshTuits)
             .catch(e => alert(e))
 
+    // Callback to toggle tuit's dislikes count - send req to REST API, on res refresh screen
+    const dislikeTuit = (tuit) =>
+        likesService.userTogglesTuitDislikes("me", tuit._id)
+            .then(refreshTuits)
+            .catch(e => alert(e))
+
     return (
     <div>
       <ul className="ttr-tuits list-group">
@@ -20,6 +26,7 @@ const Tuits = ({tuits = [], deleteTuit, refreshTuits}) => {
               <Tuit key={tuit._id}
                     deleteTuit={deleteTuit}
                     likeTuit={likeTuit}
+                    dislikeTuit={dislikeTuit}
                     tuit={tuit}/>
             );
           })
