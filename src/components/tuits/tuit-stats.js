@@ -1,6 +1,7 @@
 import React from "react";
 
 const TuitStats = ({tuit, likeTuit}) => {
+    const userLiked
 
     return(
         <div className="row mt-2">
@@ -33,15 +34,15 @@ const TuitStats = ({tuit, likeTuit}) => {
             <div className="col">
                 {/* Callback toggle like tuit on click and force screen to refresh */}
                 <span onClick={() => likeTuit(tuit)}>
-                    {/* Likes > 0: render solid red heart */}
+                    {/* Likes > 0: render solid thumbs up */}
                     {
                         tuit.stats.likes > 0 &&
-                        <i className="bi bi-heart-fill text-danger"></i>
+                        <i className="bi bi-hand-thumbs-up-fill text-danger"></i>
                     }
-                    {/* Likes <= 0: render empty heart */}
+                    {/* Likes <= 0: render empty thumbs up */}
                     {
                         tuit.stats.likes <= 0 &&
-                        <i className="bi bi-heart"></i>
+                        <i className="bi bi-hand-thumbs-up"></i>
                     }
 
                     <span className="ms-2">
@@ -51,19 +52,25 @@ const TuitStats = ({tuit, likeTuit}) => {
             </div>
 
             {/* Dislikes */}
-            {/*<div className="col">*/}
-            {/*    <span>*/}
-            {/*        <i onClick={() => dispatch(updateTuitThunk({*/}
-            {/*                                                       ...post,*/}
-            {/*                                                       disliked: true,*/}
-            {/*                                                       dislikes: (post.dislikes === undefined ? 1 : post.dislikes + 1)*/}
-            {/*                                                   }))}*/}
-            {/*           className={`bi ${post.disliked ? 'bi-hand-thumbs-down-fill' : 'bi-hand-thumbs-down'}`}></i>*/}
-            {/*    </span>*/}
-            {/*    <span className="ms-2">*/}
-            {/*        {post.dislikes === undefined ? '0' : post.dislikes}*/}
-            {/*    </span>*/}
-            {/*</div>*/}
+            <div className="col">
+                {/* Callback toggle dislike tuit on click and force screen to refresh */}
+                <span>
+                    {/* Dislikes > 0: render solid thumbs down */}
+                    {
+                        tuit.stats.dislikes > 0 &&
+                        <i className="bi bi-hand-thumbs-down-fill text-danger"></i>
+                    }
+                    {/* Dislikes <= 0: render empty thumbs down */}
+                    {
+                        tuit.stats.dislikes <= 0 &&
+                        <i className="bi bi-hand-thumbs-up-fill"></i>
+                    }
+
+                    <span className="ms-2">
+                        {tuit.stats && tuit.stats.dislikes}
+                    </span>
+                </span>
+            </div>
 
             {/* Share */}
             <div className="col">

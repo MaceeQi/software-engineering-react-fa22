@@ -9,3 +9,6 @@ const api = axios.create({
 
 export const userTogglesTuitLikes = (uid, tid) =>
     api.put(`${USERS_API}/${uid}/likes/${tid}`).then(response => response.data);
+
+export const findUserLikesTuit = (uid, tid) =>
+    api.get(`${USERS_API}/${uid}/likes/${tid}`).then(response => response.data);
