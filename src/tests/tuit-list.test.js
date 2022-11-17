@@ -11,9 +11,12 @@ const MOCKED_USERS = [
 ];
 
 const MOCKED_TUITS = [
-    {_id: "123", tuit: "alice's tuit", postedBy: MOCKED_USERS[0]._id},
-    {_id: "234", tuit: "bob's tuit", postedBy: MOCKED_USERS[1]._id},
-    {_id: "456", tuit: "charlie's tuit", postedBy: MOCKED_USERS[2]._id}
+    {_id: "123", tuit: "alice's tuit", postedBy: MOCKED_USERS[0]._id,
+        stats: {replies: 0, retuits: 0, likes: 523, dislikes: 4656}},
+    {_id: "234", tuit: "bob's tuit", postedBy: MOCKED_USERS[1]._id,
+        stats: {replies: 0, retuits: 0, likes: 523, dislikes: 4656}},
+    {_id: "456", tuit: "charlie's tuit", postedBy: MOCKED_USERS[2]._id,
+        stats: {replies: 0, retuits: 0, likes: 523, dislikes: 4656}}
 ];
 
 test('tuit list renders static tuit array', () => {
@@ -36,8 +39,8 @@ test('tuit list renders async', async () => {
         </HashRouter>
     );
 
-    const user = screen.getByText(/alice/i);
-    const tuit = screen.getByText(/Test Tuit/i);
+    const user = screen.getByText(/charlie/i);
+    const tuit = screen.getByText(/Test tuit/i);
     expect(user).toBeInTheDocument();
     expect(tuit).toBeInTheDocument();
 })
