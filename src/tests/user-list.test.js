@@ -18,16 +18,6 @@ test('user list renders static user array', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test('user list renders async', async () => {
-  const users = await findAllUsers();
-  render(
-    <HashRouter>
-      <UserList users={users}/>
-    </HashRouter>);
-  const linkElement = screen.getByText(/nasa/i);
-  expect(linkElement).toBeInTheDocument();
-})
-
 describe('mock axios - user list renders mocked', () => {
     beforeAll(() => {
       jest.spyOn(axios, 'get').mockImplementation()

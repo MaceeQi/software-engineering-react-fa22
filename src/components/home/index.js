@@ -36,7 +36,7 @@ const Home = () => {
   useEffect(async () => {
     let isMounted = true;
     await findUser();
-    findTuits();
+    await findTuits();
     return () => {isMounted = false;}
   }, []);
 
