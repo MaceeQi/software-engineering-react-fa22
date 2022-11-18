@@ -32,7 +32,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
             {/* Likes */}
             <div className="col">
                 {/* Callback toggle like tuit on click and force screen to refresh */}
-                <span onClick={() => likeTuit(tuit)}>
+                <span onClick={() => likeTuit(tuit)} id="likes">
                     {/* Likes > 0: render solid thumbs up */}
                     {
                         tuit.stats.likes > 0 &&
@@ -53,7 +53,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
             {/* Dislikes */}
             <div className="col">
                 {/* Callback toggle dislike tuit on click and force screen to refresh */}
-                <span onClick={() => dislikeTuit(tuit)}>
+                <span onClick={() => dislikeTuit(tuit)} id="dislikes">
                     {/* Dislikes > 0: render solid thumbs down */}
                     {
                         tuit.stats.dislikes > 0 &&
