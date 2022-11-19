@@ -15,7 +15,6 @@ const Home = () => {
       const currentUser = await service.profile();
       userId = currentUser._id;
       setUser(currentUser);
-      console.log(currentUser)
     } catch (e) {
       console.log("No one logged in");
     }
@@ -27,7 +26,6 @@ const Home = () => {
       return tuitsService.findTuitByUser(userId)
           .then(tuits => setTuits(tuits))
     } else {
-      console.log("find all tuits")
       return tuitsService.findAllTuits()
           .then(tuits => setTuits(tuits))
     }
