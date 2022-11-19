@@ -8,29 +8,33 @@ const Home = () => {
   const [tuits, setTuits] = useState([]);
   const [tuit, setTuit] = useState('');
   const [user, setUser] = useState({});
+  let userId = user._id;
 
   const findUser = async () => {
     try {
       const currentUser = await service.profile();
+      userId = currentUser._id;
       setUser(currentUser);
+      console.log(currentUser)
     } catch (e) {
       console.log("No one logged in");
     }
   }
 
+
   const findTuits = () => {
-    if(user._id !== undefined) {
-      return tuitsService.findTuitByUser(user._id)
+    if(userId !== undefined) {
+      return tuitsService.findTuitByUser(userId)
           .then(tuits => setTuits(tuits))
     } else {
-      console.log("no one logged in???")
+      console.log("find all tuits")
       return tuitsService.findAllTuits()
           .then(tuits => setTuits(tuits))
     }
   }
 
   const createTuit = () =>
-      tuitsService.createTuit(user._id, {tuit})
+      tuitsService.createTuit(userId, {tuit})
           .then(findTuits)
 
   const deleteTuit = (tid) =>
@@ -49,7 +53,7 @@ const Home = () => {
       <div className="border border-bottom-0">
         <h4 className="fw-bold p-2">Home Screen</h4>
         {
-          user._id &&
+          userId &&
           <div className="d-flex">
             <div className="p-2">
               <img className="ttr-width-50px rounded-circle"
