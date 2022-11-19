@@ -2,6 +2,7 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const AUTH_API = `${BASE_URL}/api/auth`;
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 // Not using axios object directly
 // axios.create creates an axios instance configured to include cookie headers to establish user identity

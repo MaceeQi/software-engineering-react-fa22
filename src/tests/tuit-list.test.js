@@ -31,6 +31,20 @@ test('tuit list renders static tuit array', () => {
     expect(tuit).toBeInTheDocument();
 });
 
+test('tuit list renders async', async () => {
+    const tuits = await findAllTuits();
+    render(
+        <HashRouter>
+            <Tuits tuits={tuits}/>
+        </HashRouter>
+    );
+
+    const user = screen.getByText(/charlie/i);
+    const tuit = screen.getByText(/Test tuit/i);
+    expect(user).toBeInTheDocument();
+    expect(tuit).toBeInTheDocument();
+})
+
 describe('mock axios - tuit list renders mocked', () => {
     beforeAll(() => {
         jest.spyOn(axios, 'get').mockImplementation()
