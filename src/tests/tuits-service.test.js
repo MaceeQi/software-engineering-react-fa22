@@ -34,7 +34,7 @@ describe('can create tuit with REST API', () => {
     // clean up after test runs
     afterAll(async () => {
         // remove tuits created by sample user
-        const tuits = await findTuitByUser(sampleUser.id);
+        const tuits = await findTuitByUser(sampleUser._id);
         for (let each of tuits) {
             await deleteTuit(each._id)
         }
@@ -45,11 +45,11 @@ describe('can create tuit with REST API', () => {
 
     test('create tuit', async () => {
         // insert new tuit by sample user in the database
-        const newTuit = await createTuit(sampleUser.id, sampleTuit);
+        const newTuit = await createTuit(sampleUser._id, sampleTuit);
 
         // verify inserted tuit's properties match expected
         expect(newTuit.tuit).toEqual(sampleTuit.tuit);
-        expect(newTuit.postedBy).toEqual(sampleUser.id);
+        expect(newTuit.postedBy).toEqual(sampleUser._id);
     })
 });
 
@@ -82,11 +82,11 @@ describe('can delete tuit with REST API', () => {
 
     test('delete tuit', async () => {
         // create sample tuit to be deleted
-        const newTuit = await createTuit(sampleUser.id, sampleTuit);
+        const newTuit = await createTuit(sampleUser._id, sampleTuit);
 
         // verify inserted tuit's properties match expected
         expect(newTuit.tuit).toEqual(sampleTuit.tuit);
-        expect(newTuit.postedBy).toEqual(sampleUser.id);
+        expect(newTuit.postedBy).toEqual(sampleUser._id);
 
         // delete tuit
         const status = await deleteTuit(newTuit._id);
@@ -126,11 +126,11 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
 
     test('findTuitById', async () => {
         // create tuit
-        newTuit = await createTuit(sampleUser.id, sampleTuit);
+        newTuit = await createTuit(sampleUser._id, sampleTuit);
 
         // verify inserted tuit's properties match expected
         expect(newTuit.tuit).toEqual(sampleTuit.tuit);
-        expect(newTuit.postedBy).toEqual(sampleUser.id);
+        expect(newTuit.postedBy).toEqual(sampleUser._id);
 
         // retrieve the tuit from the database by its primary key
         const existingTuit = await findTuitById(newTuit._id);
@@ -165,7 +165,7 @@ describe('can retrieve all tuits with REST API', () => {
 
         // create test tuits
         for (let tuit of tuits) {
-            createdTuits.push(await createTuit(sampleUser.id, {tuit}));
+            createdTuits.push(await createTuit(sampleUser._id, {tuit}));
         };
     });
 
@@ -196,7 +196,7 @@ describe('can retrieve all tuits with REST API', () => {
         tuitsWeInserted.forEach(tuit => {
             const tuitBody = tuits.find(eachTuit => eachTuit === tuit.tuit);
             expect(tuit.tuit).toEqual(tuitBody);
-            expect(tuit.postedBy._id).toEqual(sampleUser.id);
+            expect(tuit.postedBy._id).toEqual(sampleUser._id);
             expect(tuit.postedBy.username).toEqual(sampleUser.username);
         });
     });

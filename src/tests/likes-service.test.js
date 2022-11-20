@@ -37,7 +37,7 @@ describe('can like a tuit when not already liked or disliked', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuit by sample user
-        sampleTuit = await createTuit(sampleUser.id, newTuit);
+        sampleTuit = await createTuit(sampleUser._id, newTuit);
     })
 
     // clean up after test runs
@@ -49,21 +49,21 @@ describe('can like a tuit when not already liked or disliked', () => {
         await deleteUsersByUsername(sampleUser.username)
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit._id)
+        await userUnlikesTuit(sampleUser._id, sampleTuit._id)
     })
 
     test('like tuit when not already liked or disliked', async () => {
         // like tuit
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit._id);
 
         // get likes made by sample user
-        const newLikes = await findAllTuitsLikedByUser(sampleUser.id);
+        const newLikes = await findAllTuitsLikedByUser(sampleUser._id);
         expect(newLikes.length).toEqual(1);
 
         // check like created is the expected tuit
         const newLike = newLikes[0];
         expect(newLike.tuit).toEqual(sampleTuit.tuit);
-        expect(newLike.postedBy._id).toEqual(sampleUser.id);
+        expect(newLike.postedBy._id).toEqual(sampleUser._id);
 
         // check tuit stats updated
         const likedTuit = await findTuitById(sampleTuit._id);
@@ -94,10 +94,10 @@ describe('can like a tuit when already liked', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuit by sample user
-        sampleTuit = await createTuit(sampleUser.id, newTuit);
+        sampleTuit = await createTuit(sampleUser._id, newTuit);
 
         // like tuit
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit._id);
     })
 
     // clean up after test runs
@@ -109,15 +109,15 @@ describe('can like a tuit when already liked', () => {
         await deleteUsersByUsername(sampleUser.username)
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit._id)
+        await userUnlikesTuit(sampleUser._id, sampleTuit._id)
     })
 
     test('like tuit when already liked', async () => {
         // like tuit again (already liked)
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit._id);
 
         // get likes made by sample user
-        const newLikes = await findAllTuitsLikedByUser(sampleUser.id);
+        const newLikes = await findAllTuitsLikedByUser(sampleUser._id);
         expect(newLikes.length).toEqual(0);
 
         // check tuit stats updated
@@ -149,7 +149,7 @@ describe('can dislike a tuit when not already disliked or liked', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuit by sample user
-        sampleTuit = await createTuit(sampleUser.id, newTuit);
+        sampleTuit = await createTuit(sampleUser._id, newTuit);
     })
 
     // clean up after test runs
@@ -161,21 +161,21 @@ describe('can dislike a tuit when not already disliked or liked', () => {
         await deleteUsersByUsername(sampleUser.username)
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit._id)
+        await userUnlikesTuit(sampleUser._id, sampleTuit._id)
     })
 
     test('dislike tuit when not already liked or disliked', async () => {
         // dislike tuit
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit._id);
 
         // get dislikes made by sample user
-        const newDislikes = await findAllTuitsDislikedByUser(sampleUser.id);
+        const newDislikes = await findAllTuitsDislikedByUser(sampleUser._id);
         expect(newDislikes.length).toEqual(1);
 
         // check disliked tuit returned is correct tuit
         const newDislike = newDislikes[0];
         expect(newDislike.tuit).toEqual(sampleTuit.tuit);
-        expect(newDislike.postedBy._id).toEqual(sampleUser.id);
+        expect(newDislike.postedBy._id).toEqual(sampleUser._id);
 
         // check tuit stats updated
         const dislikedTuit = await findTuitById(sampleTuit._id);
@@ -206,10 +206,10 @@ describe('can dislike a tuit when already disliked', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuit by sample user
-        sampleTuit = await createTuit(sampleUser.id, newTuit);
+        sampleTuit = await createTuit(sampleUser._id, newTuit);
 
         // dislike tuit
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit._id);
     })
 
     // clean up after test runs
@@ -221,15 +221,15 @@ describe('can dislike a tuit when already disliked', () => {
         await deleteUsersByUsername(sampleUser.username)
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit._id)
+        await userUnlikesTuit(sampleUser._id, sampleTuit._id)
     })
 
     test('dislike tuit when already disliked', async () => {
         // dislike tuit again (already disliked)
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit._id);
 
         // get dislikes made by sample user
-        const newDislikes = await findAllTuitsDislikedByUser(sampleUser.id);
+        const newDislikes = await findAllTuitsDislikedByUser(sampleUser._id);
         expect(newDislikes.length).toEqual(0);
 
         // check tuit stats updated
@@ -261,10 +261,10 @@ describe('can like a tuit when already disliked', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuit by sample user
-        sampleTuit = await createTuit(sampleUser.id, newTuit);
+        sampleTuit = await createTuit(sampleUser._id, newTuit);
 
         // dislike tuit
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit._id);
     })
 
     // clean up after test runs
@@ -276,24 +276,24 @@ describe('can like a tuit when already disliked', () => {
         await deleteUsersByUsername(sampleUser.username)
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit._id)
+        await userUnlikesTuit(sampleUser._id, sampleTuit._id)
     })
 
     test('like tuit when already disliked', async () => {
         // like tuit that has already been disliked
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit._id);
 
         // get dislikes made by sample user
-        const newDislikes = await findAllTuitsDislikedByUser(sampleUser.id);
+        const newDislikes = await findAllTuitsDislikedByUser(sampleUser._id);
         expect(newDislikes.length).toEqual(0);
         // get likes made by sample user
-        const newLikes = await findAllTuitsLikedByUser(sampleUser.id);
+        const newLikes = await findAllTuitsLikedByUser(sampleUser._id);
         expect(newLikes.length).toEqual(1);
 
         // check like has expected tuit
         const newLike = newLikes[0];
         expect(newLike.tuit).toEqual(sampleTuit.tuit);
-        expect(newLike.postedBy._id).toEqual(sampleUser.id);
+        expect(newLike.postedBy._id).toEqual(sampleUser._id);
 
         // check tuit stats updated
         const likedTuit = await findTuitById(sampleTuit._id);
@@ -324,10 +324,10 @@ describe('can dislike a tuit when already liked', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuit by sample user
-        sampleTuit = await createTuit(sampleUser.id, newTuit);
+        sampleTuit = await createTuit(sampleUser._id, newTuit);
 
         // like tuit
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit._id);
     })
 
     // clean up after test runs
@@ -339,24 +339,24 @@ describe('can dislike a tuit when already liked', () => {
         await deleteUsersByUsername(sampleUser.username)
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit._id)
+        await userUnlikesTuit(sampleUser._id, sampleTuit._id)
     })
 
     test('dislike tuit when already liked', async () => {
         // dislike tuit that has already been liked
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit._id);
 
         // get dislikes made by sample user
-        const newDislikes = await findAllTuitsDislikedByUser(sampleUser.id);
+        const newDislikes = await findAllTuitsDislikedByUser(sampleUser._id);
         expect(newDislikes.length).toEqual(1);
         // get likes made by sample user
-        const newLikes = await findAllTuitsLikedByUser(sampleUser.id);
+        const newLikes = await findAllTuitsLikedByUser(sampleUser._id);
         expect(newLikes.length).toEqual(0);
 
         // check dislike is of expected tuit
         const newDislike = newDislikes[0];
         expect(newDislike.tuit).toEqual(sampleTuit.tuit);
-        expect(newDislike.postedBy._id).toEqual(sampleUser.id);
+        expect(newDislike.postedBy._id).toEqual(sampleUser._id);
 
         // check tuit stats updated
         const likedTuit = await findTuitById(sampleTuit._id);
@@ -397,9 +397,9 @@ describe('can find my liked tuits', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuits by sample user
-        sampleTuit1 = await createTuit(sampleUser.id, newTuit[0]);
-        sampleTuit2 = await createTuit(sampleUser.id, newTuit[1]);
-        sampleTuit3 = await createTuit(sampleUser.id, newTuit[2]);
+        sampleTuit1 = await createTuit(sampleUser._id, newTuit[0]);
+        sampleTuit2 = await createTuit(sampleUser._id, newTuit[1]);
+        sampleTuit3 = await createTuit(sampleUser._id, newTuit[2]);
     })
 
     // clean up after test runs
@@ -413,25 +413,25 @@ describe('can find my liked tuits', () => {
         await deleteUsersByUsername(sampleUser.username);
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit1._id);
-        await userUnlikesTuit(sampleUser.id, sampleTuit2._id);
-        await userUnlikesTuit(sampleUser.id, sampleTuit3._id);
+        await userUnlikesTuit(sampleUser._id, sampleTuit1._id);
+        await userUnlikesTuit(sampleUser._id, sampleTuit2._id);
+        await userUnlikesTuit(sampleUser._id, sampleTuit3._id);
     })
 
     test('can find my liked tuits', async () => {
         // like tuit 1, 3
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit1._id);
-        await userTogglesTuitLikes(sampleUser.id, sampleTuit3._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit1._id);
+        await userTogglesTuitLikes(sampleUser._id, sampleTuit3._id);
 
         // get likes made by sample user
-        const newLikes = await findAllTuitsLikedByUser(sampleUser.id);
+        const newLikes = await findAllTuitsLikedByUser(sampleUser._id);
         expect(newLikes.length).toEqual(2);
 
         // ensure likes returned for mylikes screen are the expected tuits
         // check like created is of expected tuit
         const newLike1 = newLikes[0];
         expect(newLike1.tuit).toEqual(sampleTuit1.tuit);
-        expect(newLike1.postedBy._id).toEqual(sampleUser.id);
+        expect(newLike1.postedBy._id).toEqual(sampleUser._id);
         // check tuit stats updated
         const likedTuit1 = await findTuitById(sampleTuit1._id);
         expect(likedTuit1.stats.likes).toEqual(1);
@@ -440,7 +440,7 @@ describe('can find my liked tuits', () => {
         // check like created is of expected tuit
         const newLike2 = newLikes[1];
         expect(newLike2.tuit).toEqual(sampleTuit3.tuit);
-        expect(newLike2.postedBy._id).toEqual(sampleUser.id);
+        expect(newLike2.postedBy._id).toEqual(sampleUser._id);
         // check tuit stats updated
         const likedTuit2 = await findTuitById(sampleTuit3._id);
         expect(likedTuit2.stats.likes).toEqual(1);
@@ -480,9 +480,9 @@ describe('can find my disliked tuits', () => {
         sampleUser = await createUser(ripley);
 
         // create sample tuits by sample user
-        sampleTuit1 = await createTuit(sampleUser.id, newTuit[0]);
-        sampleTuit2 = await createTuit(sampleUser.id, newTuit[1]);
-        sampleTuit3 = await createTuit(sampleUser.id, newTuit[2]);
+        sampleTuit1 = await createTuit(sampleUser._id, newTuit[0]);
+        sampleTuit2 = await createTuit(sampleUser._id, newTuit[1]);
+        sampleTuit3 = await createTuit(sampleUser._id, newTuit[2]);
     })
 
     // clean up after test runs
@@ -496,25 +496,25 @@ describe('can find my disliked tuits', () => {
         await deleteUsersByUsername(sampleUser.username);
 
         // remove likes created in tests
-        await userUnlikesTuit(sampleUser.id, sampleTuit1._id);
-        await userUnlikesTuit(sampleUser.id, sampleTuit2._id);
-        await userUnlikesTuit(sampleUser.id, sampleTuit3._id);
+        await userUnlikesTuit(sampleUser._id, sampleTuit1._id);
+        await userUnlikesTuit(sampleUser._id, sampleTuit2._id);
+        await userUnlikesTuit(sampleUser._id, sampleTuit3._id);
     })
 
     test('can find my disliked tuits', async () => {
         // dislike tuit 1, 2
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit1._id);
-        await userTogglesTuitDislikes(sampleUser.id, sampleTuit2._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit1._id);
+        await userTogglesTuitDislikes(sampleUser._id, sampleTuit2._id);
 
         // get dislikes made by sample user
-        const newDislikes = await findAllTuitsDislikedByUser(sampleUser.id);
+        const newDislikes = await findAllTuitsDislikedByUser(sampleUser._id);
         expect(newDislikes.length).toEqual(2);
 
         // ensure dislikes returned for my dislikes screen are the expected tuits
         // check dislike created is of expected tuit
         const newDislike1 = newDislikes[0];
         expect(newDislike1.tuit).toEqual(sampleTuit1.tuit);
-        expect(newDislike1.postedBy._id).toEqual(sampleUser.id);
+        expect(newDislike1.postedBy._id).toEqual(sampleUser._id);
         // check tuit stats updated
         const dislikedTuit1 = await findTuitById(sampleTuit1._id);
         expect(dislikedTuit1.stats.likes).toEqual(0);
@@ -523,7 +523,7 @@ describe('can find my disliked tuits', () => {
         // check dislike created is of expected tuit
         const newDislike2 = newDislikes[1];
         expect(newDislike2.tuit).toEqual(sampleTuit2.tuit);
-        expect(newDislike2.postedBy._id).toEqual(sampleUser.id);
+        expect(newDislike2.postedBy._id).toEqual(sampleUser._id);
         // check tuit stats updated
         const dislikedTuit2 = await findTuitById(sampleTuit2._id);
         expect(dislikedTuit2.stats.likes).toEqual(0);

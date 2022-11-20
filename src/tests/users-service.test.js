@@ -95,7 +95,7 @@ describe('findUserById',  () => {
     expect(newUser.email).toEqual(adam.email);
 
     // retrieve the user from the database by its primary key
-    const existingUser = await findUserById(newUser.id);
+    const existingUser = await findUserById(newUser._id);
 
     // verify retrieved user matches parameter user
     expect(existingUser.username).toEqual(adam.username);
