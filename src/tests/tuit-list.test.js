@@ -40,7 +40,7 @@ test('tuit list renders async', async () => {
     );
 
     const user = screen.getByText(/charlie/i);
-    const tuit = screen.getByText(/Test tuit/i);
+    const tuit = screen.getByText(/peanuts are good for you/i);
     expect(user).toBeInTheDocument();
     expect(tuit).toBeInTheDocument();
 })
