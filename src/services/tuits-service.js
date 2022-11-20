@@ -2,7 +2,6 @@ import axios from "axios";
 const BASE_URL = "http://fse-a2-env.eba-6nbikgir.us-east-1.elasticbeanstalk.com"
 const TUITS_API = `${BASE_URL}/api/tuits`;
 const USERS_API = `${BASE_URL}/api/users`;
-axios.defaults.adapter = require('axios/lib/adapters/http');
 
 export const findAllTuits = () =>
   axios.get(TUITS_API)
