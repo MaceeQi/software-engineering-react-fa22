@@ -2,6 +2,7 @@ import axios from "axios";
 const BASE_URL = "http://fse-a2-env.eba-6nbikgir.us-east-1.elasticbeanstalk.com";
 // const BASE_URL = "https://software-engineering-node-fa22.herokuapp.com/api";
 // const BASE_URL = "http://localhost:4000/api";
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 const LOGIN_API = `${BASE_URL}/api/login`;
 const USERS_API = `${BASE_URL}/api/users`;
